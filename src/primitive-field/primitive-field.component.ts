@@ -23,13 +23,8 @@
 import { Component, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
-import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
-
 import { AbstractFieldComponent } from '../abstract-field';
-import { AutocompleteInputComponent } from '../autocomplete-input';
-import { SearchableDropdownComponent } from '../searchable-dropdown';
 
-import { ErrorsToMessagesHtmlPipe } from '../shared/pipes';
 import {
   AppGlobalsService,
   ComponentTypeService,
@@ -39,9 +34,6 @@ import {
 @Component({
   selector: 'primitive-field',
   encapsulation: ViewEncapsulation.None,
-  directives: [TOOLTIP_DIRECTIVES, AutocompleteInputComponent, SearchableDropdownComponent],
-  pipes: [ErrorsToMessagesHtmlPipe],
-  providers: [ComponentTypeService, SchemaValidationService],
   styleUrls: [
     './primitive-field.component.scss'
   ],

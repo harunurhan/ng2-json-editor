@@ -20,12 +20,13 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-export interface AutocompletionResult {
+// TODO: investigate if it is good to define shared models here
+interface AutocompletionResult {
   text: string;
   payload?: Object;
 }
 
-export interface AutocompletionOptions {
+interface AutocompletionOptions {
   url: string;
   path: string;
   size: number;

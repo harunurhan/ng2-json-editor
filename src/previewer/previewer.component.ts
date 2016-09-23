@@ -22,14 +22,10 @@
 
 import { Component, Input } from '@angular/core';
 
-import { PdfViewerComponent } from 'ng2-pdf-viewer';
-import { TAB_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
-
 import { AbstractTrackerComponent } from '../abstract-tracker';
 
 @Component({
   selector: 'previewer',
-  directives: [PdfViewerComponent, TAB_DIRECTIVES],
   styleUrls: [
     './previewer.component.scss'
   ],

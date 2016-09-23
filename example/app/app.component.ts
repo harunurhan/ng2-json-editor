@@ -24,11 +24,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { EditorComponent } from '../../ng2-json-editor';
-
 @Component({
   selector: 'app',
-  directives: [EditorComponent],
   encapsulation: ViewEncapsulation.None, //  Apply style (bootstrap.scss) globally
   styles: [
     require('./app.component.scss')

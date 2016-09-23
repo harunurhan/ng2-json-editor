@@ -24,15 +24,10 @@ import { Component, Input, forwardRef } from '@angular/core';
 
 import { AbstractTrackerComponent } from '../abstract-tracker';
 
-import { MapToSortedIterablePipe } from '../shared/pipes';
-
-import { DomUtilService } from '../shared/services';
-import { WindowHrefService } from './window-href.service';
+import { DomUtilService, WindowHrefService } from '../shared/services';
 
 @Component({
   selector: 'tree-menu-item',
-  directives: [forwardRef(() => TreeMenuItemComponent)],
-  pipes: [MapToSortedIterablePipe],
   styleUrls: [
     './tree-menu-item.component.scss'
   ],

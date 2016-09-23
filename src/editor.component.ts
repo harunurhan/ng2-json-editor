@@ -24,15 +24,7 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { Http } from '@angular/http';
 
 import { AbstractTrackerComponent } from './abstract-tracker';
-import { ComplexListFieldComponent } from './complex-list-field';
-import { ObjectFieldComponent } from './object-field';
-import { PreviewerComponent, Preview } from './previewer';
-import { PrimitiveListFieldComponent } from './primitive-list-field';
-import { PrimitiveFieldComponent } from './primitive-field';
-import { TableListFieldComponent } from './table-list-field';
-import { TreeMenuComponent } from './tree-menu';
-
-import { MapToSortedIterablePipe, UnderscoreToSpacePipe } from './shared/pipes';
+import { Preview } from './previewer';
 
 import {
   AppGlobalsService,
@@ -44,22 +36,6 @@ import {
 @Component({
   selector: 'editor',
   encapsulation: ViewEncapsulation.None,
-  directives: [
-    ComplexListFieldComponent,
-    ObjectFieldComponent,
-    PreviewerComponent,
-    PrimitiveListFieldComponent,
-    PrimitiveFieldComponent,
-    TableListFieldComponent,
-    TreeMenuComponent
-  ],
-  pipes: [MapToSortedIterablePipe, UnderscoreToSpacePipe],
-  providers: [
-    AppGlobalsService,
-    ComponentTypeService,
-    JsonUtilService,
-    RecordFixerService
-  ],
   styleUrls: [
     './editor.component.scss'
   ],

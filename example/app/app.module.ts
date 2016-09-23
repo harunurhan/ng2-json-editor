@@ -20,32 +20,23 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input } from '@angular/core';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms'
+import { HttpModule } from '@angular/http';
 
-import { AbstractAddFieldDropdownComponent } from './abstract-add-field-dropdown.component';
+import { EditorModule } from '../../ng2-json-editor';
 
-import { EmptyValueService } from '../shared/services';
+import { AppComponent } from './app.component';
 
-@Component({
-  selector: 'add-field-to-object-dropdown',
-  styleUrls: [
-    './add-field-dropdown.component.scss'
+@NgModule({
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+    EditorModule
   ],
-  templateUrl: './add-field-dropdown.component.html'
+  bootstrap: [AppComponent]
 })
-export class AddFieldToObjectDropdownComponent extends AbstractAddFieldDropdownComponent {
-
-  // 'propeties' of an object schema
-  @Input() schema: Object;
-  @Input() value: Object;
-
-  constructor(private emptyValueService: EmptyValueService) {
-    super();
-  }
-
-  addFieldFromSchema(name: string) {
-    let subSchema = this.schema[name];
-    this.value[name] = this.emptyValueService.generateEmptyValue(subSchema);
-  }
-
-}
+export class AppModule { }

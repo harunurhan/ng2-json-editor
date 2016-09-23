@@ -1,1 +1,1 @@
-export { EditorComponent } from './editor.component';
+export { EditorModule } from './editor.module';

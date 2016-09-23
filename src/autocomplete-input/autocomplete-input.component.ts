@@ -24,17 +24,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
-import { TYPEAHEAD_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
-
-import { AutocompletionService } from './autocompletion.service';
-
-import { AutocompletionOptions } from './autocompletion.model';
-
+import { AutocompletionService } from '../shared/services';
 
 @Component({
   selector: 'autocomplete-input',
-  directives: [TYPEAHEAD_DIRECTIVES],
-  providers: [AutocompletionService],
   styleUrls: [
     './autocomplete-input.component.scss'
   ],

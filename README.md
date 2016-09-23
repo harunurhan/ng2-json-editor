@@ -142,9 +142,6 @@ npm install
 ### Useful commands
 
 ```bash
-# typings install
-typings install
-
 # start the server with example-app
 npm start
 

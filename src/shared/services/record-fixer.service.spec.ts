@@ -20,19 +20,15 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { addProviders, inject } from '@angular/core/testing';
-
 import { RecordFixerService } from './record-fixer.service';
 
 describe('RecordFixerService', () => {
 
   let service: RecordFixerService;
 
-  beforeEach(() => addProviders([RecordFixerService]));
-
-  beforeEach(inject([RecordFixerService], (recordFixerService) => {
-    service = recordFixerService;
-  }));
+  beforeEach(() => {
+    service = new RecordFixerService();
+  });
 
   it('should add properties that are marked as x_editor_always_show to a record with depth 1',
     () => {

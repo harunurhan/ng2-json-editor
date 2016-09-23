@@ -20,10 +20,10 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { TestComponentBuilder } from '@angular/compiler/testing';
 import {
+  async,
   ComponentFixture,
-  inject
+  TestBed
 } from '@angular/core/testing';
 
 import { PrimitiveFieldComponent } from './primitive-field.component';
@@ -52,16 +52,26 @@ function changeInputElementValue(el: HTMLInputElement, value: string) {
 
 describe('PrimitiveFieldComponent', () => {
 
-  const providers: Array<any> = [AppGlobalsService, ComponentTypeService, SchemaValidationService];
   let fixture: ComponentFixture<PrimitiveFieldComponent>;
   let component: PrimitiveFieldComponent;
   let nativeEl: HTMLElement;
   let inputEl: HTMLInputElement;
 
-  beforeEach(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-    fixture = tcb
-      .overrideProviders(PrimitiveFieldComponent, providers)
-      .createSync(PrimitiveFieldComponent);
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        PrimitiveFieldComponent
+      ],
+      providers: [
+        AppGlobalsService,
+        ComponentTypeService,
+        SchemaValidationService
+      ]
+    }).compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(PrimitiveFieldComponent);
     component = fixture.componentInstance;
 
     // force component to render completely by setting @Input() manually 
@@ -75,7 +85,7 @@ describe('PrimitiveFieldComponent', () => {
     nativeEl = fixture.nativeElement;
     inputEl = nativeEl
       .querySelector('input, textarea') as HTMLInputElement;
-  }));
+  });
 
   it('should be binded to view', () => {
     let modelValue = 'modelValue';

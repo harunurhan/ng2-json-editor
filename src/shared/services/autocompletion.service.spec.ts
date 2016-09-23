@@ -20,16 +20,17 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { provide } from '@angular/core';
 import {
-  ConnectionBackend,
-  HTTP_PROVIDERS,
+
+} from '@angular/core';
+import {
+  HttpModule,
   Http,
   Response,
   ResponseOptions,
   RequestOptionsArgs
 } from '@angular/http';
-import { async, addProviders, inject } from '@angular/core/testing';
+import { async, inject, TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs/Observable';
 
 import { AutocompletionService } from './autocompletion.service';
@@ -63,15 +64,18 @@ describe('AutocompletionService', () => {
 
   let service: AutocompletionService;
 
-  beforeEach(() => addProviders([
-    AutocompletionService,
-    ...HTTP_PROVIDERS, // necessary to provide Http fro the component
-    provide(Http, { useClass: MockHttp }),
-    ConnectionBackend // necessary to provide Http for the component
-  ]));
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpModule],
+      providers: [
+        AutocompletionService,
+        { provide: Http, useClass: MockHttp }
+      ]
+    });
+  });
 
-  beforeEach(inject([AutocompletionService], (emptyValueService) => {
-    service = emptyValueService;
+  beforeEach(inject([AutocompletionService], (autocompletionService) => {
+    service = autocompletionService;
   }));
 
   it('should get autocompletion results', (done) => {
