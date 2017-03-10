@@ -34,6 +34,7 @@ import { AnyTypeFieldComponent } from './any-type-field';
 import { AutocompleteInputComponent } from './autocomplete-input';
 import { ComplexListFieldComponent } from './complex-list-field';
 import { EditorPreviewerComponent } from './editor-previewer';
+import { SubRecordComponent } from './sub-record';
 import { FindReplaceComponent } from './find-replace';
 import { HtmlViewComponent } from './html-view';
 import { JsonEditorComponent } from './json-editor.component';
@@ -75,6 +76,7 @@ import { SHARED_PIPES, SHARED_SERVICES, SHARED_DIRECTIVES } from './shared';
     TreeMenuItemComponent,
     TreeMenuComponent,
     JsonEditorComponent,
+    SubRecordComponent,
     HtmlViewComponent
   ],
   exports: [JsonEditorComponent],
@@ -108,5 +110,6 @@ export {
   TreeMenuItemComponent,
   TreeMenuComponent,
   JsonEditorComponent,
+  SubRecordComponent,
   HtmlViewComponent
 }
