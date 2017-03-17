@@ -42,19 +42,23 @@ export class SubRecordComponent implements OnInit {
   @Input() isPreviewerHidden: boolean;
   @Input() isPreviewerDisabled: boolean;
 
-  keys: Set<string>;
+  keysByType: { others: Set<string>, toggles: Set<string> };
+  allKeys: Set<string>;
   pathCache: PathCache = {};
 
   constructor(public jsonStoreService: JsonStoreService,
     public appGlobalsService: AppGlobalsService) { }
 
   ngOnInit() {
-    this.keys = this.value.keySeq().toSet();
+    this.allKeys = this.value.keySeq().toSet();
+    this.keysByType = this.allKeys
+      .groupBy(key => this.isToggle(key) ? 'toggles' : 'others')
+      .toObject() as any;
   }
 
-  deleteField(field: string) {
+  deleteField(field: string, fieldType: string) {
     this.jsonStoreService.removeIn(this.getPathForField(field));
-    this.keys = this.keys.remove(field);
+    this.keysByType.others = this.keysByType.others.remove(field);
   }
 
   getPathForField(field: string): Array<any> {
@@ -65,7 +69,15 @@ export class SubRecordComponent implements OnInit {
   }
 
   onFieldAdd(field: string) {
-    this.keys = this.keys.add(field);
+    if (this.isToggle(field)) {
+      this.keysByType.toggles = this.keysByType.toggles.add(field);
+    } else {
+      this.keysByType.others = this.keysByType.others.add(field);
+    }
+  }
+
+  onToggleValueChange(field: string, value: boolean) {
+    this.jsonStoreService.setIn(this.getPathForField(field), value);
   }
 
   get rightContainerColMdClass(): string {
@@ -81,5 +93,9 @@ export class SubRecordComponent implements OnInit {
       return 'col-md-2';
     }
     return this.isPreviewerHidden ? 'col-md-3 col-md-override-2-2' : 'col-md-3';
+  }
+
+  private isToggle(field: string): boolean {
+    return this.schema['properties'][field]['toggleColor'] !== undefined;
   }
 }
