@@ -51,10 +51,15 @@ export class SubRecordComponent implements OnInit {
     public appGlobalsService: AppGlobalsService) { }
 
   ngOnInit() {
+    this.value = this.value || Map<string, any>();
     this.allKeys = this.value.keySeq().toSet();
-    this.keysByType = this.allKeys
-      .groupBy(key => this.isToggle(key) ? 'toggles' : 'others')
-      .toObject() as any;
+    if (this.allKeys.isEmpty()) {
+      this.keysByType = { toggles: Set<string>(), others: Set<string>() };
+    } else {
+      this.keysByType = this.allKeys
+        .groupBy(key => this.isToggle(key) ? 'toggles' : 'others')
+        .toObject() as any;
+    }
   }
 
   // delete only work for others, not toggles (UPDATE: config comment if this changes)

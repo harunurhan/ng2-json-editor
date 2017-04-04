@@ -136,7 +136,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
       this.keyToTabName = this.tabsUtilService.getKeyToTabName(this.config.tabsConfig, this.schema);
       this.tabNameToSubRecordMap = this.tabsUtilService.getTabNameToSubRecordMap(this._record, this.keyToTabName);
       this.tabNameToSubSchema = this.tabsUtilService.getTabNameToSubSchema(this.schema, this.keyToTabName);
-      this.tabNames = this.tabNameToSubRecordMap.keySeq().toArray();
+      this.tabNames = this.tabsUtilService.getTabNames(this.config.tabsConfig);
     }
 
   }

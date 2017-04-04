@@ -36,6 +36,13 @@ export class TabsUtilService {
       .groupBy((value, key) => keyToTabName[key]);
   }
 
+  getTabNames(tabsConfig: TabsConfig): Array<string> {
+    let tabNames = tabsConfig.tabs.map(tab => tab.name);
+    // insert default tab name at the beginning
+    return [tabsConfig.defaultTabName]
+      .concat(tabNames);
+  }
+
   getKeyToTabName(tabsConfig: TabsConfig, schema: Object): {} {
     // set tab.name for configured keys
     let keyToTabName = tabsConfig.tabs
@@ -55,7 +62,6 @@ export class TabsUtilService {
     return keyToTabName;
   }
 
-  // TODO: shouldn't acces this
   getTabNameToSubSchema(schema: Object, keyToTabName: { [key: string]: string }): {} {
     let schemaProps = schema['properties'];
     let tabNameToSchemaProps = Object.keys(schemaProps)
