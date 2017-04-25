@@ -1,0 +1,23 @@
+<div class="btn-group add-field-dropdown-container" dropdown keyboardNav="true">
+  <button type="button" class="btn-add-field-dropdown" dropdownToggle>
+    <ng-content></ng-content> <i class="fa fa-caret-down"></i>
+  </button>
+  <ul class="dropdown-menu" *dropdownMenu>
+    <ng-template [ngTemplateOutlet]="nestedTempate" [ngTemplateOutletContext]="{ map: mockMap }"></ng-template>
+  </ul>
+</div>
+
+<ng-template #nestedTempate let-map="map" let-padding="padding">
+  <li *ngFor="let key of keys(map)">
+    <div [ngSwitch]="typeOf(map[key])">
+      <div *ngSwitchCase="'string'">
+        <a class="dropdown-item" href="javascript:void(0)" (click)="onFieldSelect(map[key])">{{key}} </a>
+      </div>
+      <div *ngSwitchCase="'object'">
+        <li class="divider dropdown-divider"></li>
+        <li class="dropdown-header title">{{key}}</li>
+        <ng-template [ngTemplateOutlet]="nestedTempate" [ngTemplateOutletContext]="{ map: map[key] }"></ng-template>
+      </div>
+    </div>
+  </li>
+</ng-template>

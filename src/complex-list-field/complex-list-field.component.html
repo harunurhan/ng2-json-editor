@@ -51,6 +51,9 @@
         <object-field [value]="values.get(item.index)" [schema]="schema.items" [path]="getPathForChild(item.index)">
           <list-action-group (onMove)="moveElement(item.index, $event)" (onDelete)="deleteElement(item.index)" [canMove]="schema.sortable"></list-action-group>
         </object-field>
+        <add-nested-field-dropdown>
+          <i class="fa fa-plus"></i>
+        </add-nested-field-dropdown>
       </span>
     </div>
   </div>
