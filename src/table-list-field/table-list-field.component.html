@@ -8,10 +8,7 @@
             {{key | underscoreToSpace}}
           </th>
           <th class="button-holder" [ngClass]="sortableClass">
-            <add-field-dropdown *ngIf="values.size > 0" [fields]="keys" [pathString]="getPathForChildString(0)" (onFieldAdd)="onFieldAdd($event)"
-              [schema]="schema.items">
-              <i class="fa fa-plus"></i>
-            </add-field-dropdown>
+
           </th>
         </tr>
       </thead>
