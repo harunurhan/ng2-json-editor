@@ -23,7 +23,7 @@
 import { Component, Input, Output, EventEmitter, ElementRef } from '@angular/core';
 import { Set } from 'immutable';
 
-import { DomUtilService, EmptyValueService, PathUtilService } from '../shared/services';
+import { DomUtilService, EmptyValueService, PathUtilService, JsonStoreService } from '../shared/services';
 import { JSONSchema } from '../shared/interfaces';
 
 @Component({
@@ -38,25 +38,41 @@ export class AddNestedFieldDropdownComponent {
   tabPadding = 8;
   initialPadding = 20;
 
+  // for now order here is important
+  // first string value ones then the object ones.
   mockMap = {
-    curated_relation: '/root/curated_relation',
-    raw_refs: '/root/raw_refs',
+    raw_refs: '/references/0/raw_refs',
+    record: '',
     reference: {
-      arxiv_eprints: '/root/reference/arxiv_eprints',
-      publication_info: {
-        cnum: '/root/reference/publication_info/cnum'
+      arxiv_eprints: '/references/0/reference/arxiv_eprints',
+      publication_info: '/references/0/reference/publication_info',
+      book_series: '/references/0/reference/book_series',
+      collaborations: '/references/0/reference/collaborations',
+      document_type: '/references/0/reference/document_type',
+      imprint: '/references/0/reference/imprint',
+      isbn: '/references/0/reference/isbn',
+      persistent_identifiers: '/references/0/reference/persistent_identifiers',
+      report_number: '/references/0/reference/report_number',
+      texkey: '/references/0/reference/texkey',
+      title: '/references/0/reference/title',
+      urls: '/references/0/reference/urls',
+      authors: {
+        inspire_role: '/references/0/reference/authors/*/role'
       }
-    },
-    record: {
-      $ref: '/root/record/$ref',
     }
   };
 
   // could be a pipe later
   keys = Object.keys;
 
-  onFieldSelect(path: string) {
-    console.log(path);
+  constructor(public jsonStoreService: JsonStoreService,
+    public pathUtilService: PathUtilService,
+    public emptyValueService: EmptyValueService) { }
+
+  onFieldSelect(pathString: string) {
+    let path = this.pathUtilService.toPathArray(pathString);
+    delete this.mockMap[path[2]][path[3]];
+    this.jsonStoreService.setIn(path, ['']);
   }
 
   // could be a pipe later
